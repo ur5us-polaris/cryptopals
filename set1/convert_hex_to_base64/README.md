@@ -18,11 +18,11 @@ With this in mind, and in context of `cryptopals` challenges, we will need to un
 we were asked to encrypt/decrypt or encode/decode. Right from this first challenge, this is a possible pitfall.
 We are give the INPUT string `49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d`
 and asked to base64 encode it to a given OUTPUT string.
-The naive approach will be converting the INPUT string to bytes by characters ascii value (0x34 0x39 0x32 0x37 etc.), but
+The naive approach will be converting the INPUT string to bytes by characters ascii value (`4` to `0x34`, `9` to `0x39` etc.), but
 base64 encoding these bytes will return the wrong string!
 
 On the other hand, after examining the INPUT string, we see it is **made of characters that correspond to hexadecimal digits**,
-and therefore **we will treat it as ascii encoded bytes** (0x49 0x27 0x6d 0x20 etc.). Accordingly, we will use `binascii.unhexlify` to convert each 2
+and therefore **we will treat it as ascii encoded bytes** (`49` to `0x49`, `27` to `0x27` etc.). Accordingly, we will use `binascii.unhexlify` to convert each 2
 characters to a byte with the corresponding value, and than base64 encode the resulting bytes using `base64.b64encode`.
 The resulting ascii string returned from `unhexlify` is a treat enough (try printing it out!), but base64 decoding it is
 extra fulfilling as we get the correct OUTPUT.
